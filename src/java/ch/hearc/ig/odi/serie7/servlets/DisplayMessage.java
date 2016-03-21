@@ -2,10 +2,12 @@ package ch.hearc.ig.odi.serie7.servlets;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  *
@@ -25,7 +27,16 @@ public class DisplayMessage extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
+        HttpSession session = request.getSession();
+        String prenom = (String) session.getAttribute("prenom");
+        RequestDispatcher dispatcher;
         try (PrintWriter out = response.getWriter()) {
+            if (prenom == null) {
+                dispatcher = request.getRequestDispatcher("AskNameToStoreToSession");
+            } else {
+                dispatcher = request.getRequestDispatcher("DisplayInformations");
+            }
+            dispatcher.forward(request, response);
             /* TODO output your page here. You may use following sample code. */
             out.println("<!DOCTYPE html>");
             out.println("<html>");
