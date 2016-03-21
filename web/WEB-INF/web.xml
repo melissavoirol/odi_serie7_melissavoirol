@@ -12,6 +12,10 @@
             <param-value>Melissa</param-value>
         </init-param>
     </servlet>
+    <servlet>
+        <servlet-name>AskNameToDisplay</servlet-name>
+        <servlet-class>ch.hearc.ig.odi.serie7.servlets.AskNameToDisplay</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>DisplayMessage</servlet-name>
         <url-pattern>/DisplayMessage</url-pattern>
@@ -19,6 +23,10 @@
     <servlet-mapping>
         <servlet-name>DisplayInformations</servlet-name>
         <url-pattern>/DisplayInformations</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AskNameToDisplay</servlet-name>
+        <url-pattern>/AskNameToDisplay</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
@@ -28,6 +36,7 @@
     <welcome-file-list>
         <!--<welcome-file>index.jsp</welcome-file>-->
         <!--<welcome-file>DisplayMessage</welcome-file>-->
-        <welcome-file>DisplayInformations</welcome-file>
+        <!--<welcome-file>DisplayInformations</welcome-file>-->
+        <welcome-file>AskNameToDisplay</welcome-file>
     </welcome-file-list>
 </web-app>
