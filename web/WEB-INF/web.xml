@@ -16,6 +16,10 @@
         <servlet-name>AskNameToDisplay</servlet-name>
         <servlet-class>ch.hearc.ig.odi.serie7.servlets.AskNameToDisplay</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>AskNameToStoreToSession</servlet-name>
+        <servlet-class>ch.hearc.ig.odi.serie7.servlets.AskNameToStoreToSession</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>DisplayMessage</servlet-name>
         <url-pattern>/DisplayMessage</url-pattern>
@@ -28,6 +32,10 @@
         <servlet-name>AskNameToDisplay</servlet-name>
         <url-pattern>/AskNameToDisplay</url-pattern>
     </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AskNameToStoreToSession</servlet-name>
+        <url-pattern>/AskNameToStoreToSession</url-pattern>
+    </servlet-mapping>
     <session-config>
         <session-timeout>
             30
@@ -37,6 +45,7 @@
         <!--<welcome-file>index.jsp</welcome-file>-->
         <!--<welcome-file>DisplayMessage</welcome-file>-->
         <!--<welcome-file>DisplayInformations</welcome-file>-->
-        <welcome-file>AskNameToDisplay</welcome-file>
+        <!--<welcome-file>AskNameToDisplay</welcome-file>-->
+        <welcome-file>AskNameToStoreToSession</welcome-file>
     </welcome-file-list>
 </web-app>

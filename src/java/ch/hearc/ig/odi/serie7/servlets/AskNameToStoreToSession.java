@@ -2,31 +2,16 @@ package ch.hearc.ig.odi.serie7.servlets;
 
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.Date;
-import java.util.Enumeration;
-import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 /**
  *
  * @author Melissa Voirol <melissa.voirol@he-arc.ch>
  */
-public class DisplayInformations extends HttpServlet {
-
-    protected String param = null;
-    protected String value = null;
-
-    public void init(ServletConfig config)
-            throws ServletException {
-        for (Enumeration e = config.getInitParameterNames(); e.hasMoreElements();) {
-            this.param = (String) e.nextElement();
-            this.value = config.getInitParameter("prenom");
-        }
-    }
+public class AskNameToStoreToSession extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -39,36 +24,21 @@ public class DisplayInformations extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        request.setCharacterEncoding("UTF-8");
-        String prenom1 = request.getParameter("prenom");
-        HttpSession session = request.getSession();
-        String id = session.getId();
-        Date date = new Date(session.getCreationTime());
-        session.setAttribute("prenom", prenom1);
-        String prenom2 = (String) session.getAttribute("prenom");
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet DisplayInformations</title>");
+            out.println("<title>Servlet AskNameToDisplay</title>");
             out.println("</head>");
             out.println("<body>");
-            //out.println("<h1>Servlet DisplayInformations at " + request.getContextPath() + "</h1>");
-            //out.print("Prénom passé en paramètre : ");
-            out.print("Prénom stocké dans un attribut de session : ");
-            out.println(prenom2);
-            out.print("<br>");
-            out.print("Valeur du paramètre \"" + this.param + "\" mis dans le web.xml : ");
-            out.println(this.value);
-            out.print("<br>");
-            out.println("<h1>Informations liées à la session : </h1>");
-            out.print("- id : ");
-            out.println(id);
-            out.print("<br>");
-            out.print("- date de création : ");
-            out.println(date);
+            //out.println("<h1>Servlet AskNameToDisplay at " + request.getContextPath() + "</h1>");
+            out.println("<form action=\"DisplayInformations\">");
+            out.println("Prénom : <br>");
+            out.println("<input type=\"text\" name=\"prenom\"><br>");
+            out.println("<input type=\"submit\" value=\"Validation\">");
+            out.println("</form>");
             out.println("</body>");
             out.println("</html>");
         }
