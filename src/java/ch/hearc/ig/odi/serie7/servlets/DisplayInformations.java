@@ -20,6 +20,7 @@ public class DisplayInformations extends HttpServlet {
     protected String param = null;
     protected String value = null;
 
+    @Override
     public void init(ServletConfig config)
             throws ServletException {
         for (Enumeration e = config.getInitParameterNames(); e.hasMoreElements();) {
@@ -40,12 +41,25 @@ public class DisplayInformations extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         request.setCharacterEncoding("UTF-8");
-        String prenom1 = request.getParameter("prenom");
+
+        String prenom = request.getParameter("prenom");
         HttpSession session = request.getSession();
+        if (session == null) {
+            System.out.println("Pas de session");
+        } else {
+            if (prenom != null) {
+                if (!session.isNew()) {
+                    session.invalidate();
+                    session = request.getSession();
+                }
+                session.setAttribute("prenom", prenom);
+            }
+            prenom = (String) session.getAttribute("prenom");
+        }
+
         String id = session.getId();
         Date date = new Date(session.getCreationTime());
-        session.setAttribute("prenom", prenom1);
-        String prenom2 = (String) session.getAttribute("prenom");
+
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
@@ -58,7 +72,7 @@ public class DisplayInformations extends HttpServlet {
             //out.println("<h1>Servlet DisplayInformations at " + request.getContextPath() + "</h1>");
             //out.print("Prénom passé en paramètre : ");
             out.print("Prénom stocké dans un attribut de session : ");
-            out.println(prenom2);
+            out.println(prenom);
             out.print("<br>");
             out.print("Valeur du paramètre \"" + this.param + "\" mis dans le web.xml : ");
             out.println(this.value);
