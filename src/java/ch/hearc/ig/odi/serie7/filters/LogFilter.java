@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.io.PrintStream;
 import java.io.PrintWriter;
 import java.io.StringWriter;
+import java.util.Date;
 import javax.servlet.Filter;
 import javax.servlet.FilterChain;
 import javax.servlet.FilterConfig;
@@ -57,9 +58,13 @@ public class LogFilter implements Filter {
     
     private void doAfterProcessing(ServletRequest request, ServletResponse response)
             throws IOException, ServletException {
-        if (debug) {
+        /*if (debug) {
             log("LogFilter:DoAfterProcessing");
-        }
+        }*/
+        
+        Date date = new Date();
+        System.out.println("Accès Servlet : ");
+        System.out.println(date);
 
 	// Write code here to process the request and/or response after
         // the rest of the filter chain is invoked.
